@@ -8,12 +8,12 @@
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-6">{{ $heroData['title'] }}</h1>
             <p class="text-xl mb-8 text-blue-100">{{ $heroData['subtitle'] }}</p>
-            
+
             <!-- Search Box -->
             <form action="{{ route('search') }}" method="GET" class="max-w-2xl mx-auto">
                 <div class="flex shadow-lg rounded-lg overflow-hidden">
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         name="q"
                         placeholder="{{ $heroData['search_placeholder'] }}"
                         class="flex-grow px-6 py-4 text-gray-800 focus:outline-none"
@@ -32,7 +32,7 @@
             <h2 class="text-3xl font-bold text-center mb-12">Kategori Dokumen Hukum</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 @foreach($popularCategories as $category)
-                <a href="{{ route('category.documents', $category->kategori_id) }}" 
+                <a href="{{ route('category.documents', $category->kategori_id) }}"
                    class="bg-gray-50 p-6 rounded-lg text-center hover:shadow-lg transition duration-200 border border-gray-200">
                     <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-file-alt text-blue-600"></i>
@@ -54,7 +54,7 @@
                     Lihat Semua <i class="ml-1 fas fa-arrow-right"></i>
                 </a>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($recentDocuments as $document)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-200">
@@ -71,7 +71,7 @@
                             <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
                                 {{ $document->kategori->nama }}
                             </span>
-                            <a href="{{ route('document.detail', $document->dokumen_id) }}" 
+                            <a href="{{ route('document.detail', $document->dokumen_id) }}"
                                class="text-blue-600 hover:text-blue-800 text-sm font-semibold">
                                 Baca Selengkapnya
                             </a>
@@ -86,7 +86,7 @@
     <!-- Features Section -->
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Mengapa Memilih LegalHub?</h2>
+            <h2 class="text-3xl font-bold text-center mb-12"></h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="text-center">
                     <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">

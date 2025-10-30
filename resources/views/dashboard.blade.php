@@ -60,18 +60,18 @@
     <!-- Quick Actions -->
      <!-- Tambahkan di bagian Quick Actions -->
 <div class="bg-white rounded-lg shadow-md p-6">
-    <h2 class="text-xl font-bold text-gray-800 mb-4">Administrasi</h2>
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Guest</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <a href="{{ route('admin.dashboard') }}" 
+        <a href="{{ route('admin.dashboard') }}"
            class="flex items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition duration-200">
             <i class="fas fa-cog text-purple-600 text-xl mr-3"></i>
             <div>
-                <h4 class="font-semibold">Panel Admin</h4>
+                <h4 class="font-semibold">Panel Guest</h4>
                 <p class="text-sm text-gray-600">Kelola kategori dan dokumen</p>
             </div>
         </a>
     </div>
-</div>  
+</div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Left Column -->
         <div class="space-y-6">
@@ -147,17 +147,17 @@
 {{-- Tambahkan di bagian manapun sebelum penutup content --}}
 <div class="bg-white rounded-lg shadow-md p-6 mt-6">
     <div class="flex items-center justify-between mb-4">
-        <h2 class="text-xl font-bold text-gray-800">Administrasi Website</h2>
-        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Admin</span>
+        <h2 class="text-xl font-bold text-gray-800">Guest Website</h2>
+        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Guest</span>
     </div>
     <p class="text-gray-600 mb-4">Kelola konten dan data website Produk Hukum & Dokumen Publik</p>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <a href="{{ route('admin.dashboard') }}" 
+        <a href="{{ route('admin.dashboard') }}"
            class="flex items-center p-4 bg-gradient-to-r from-purple-500 to-blue-600 rounded-lg hover:from-purple-600 hover:to-blue-700 transition duration-200 text-white shadow-md">
             <i class="fas fa-cog text-2xl mr-4"></i>
             <div>
-                <h4 class="font-semibold text-lg">Panel Administrator</h4>
+                <h4 class="font-semibold text-lg">Panel Guest</h4>
                 <p class="text-purple-100 text-sm">Kelola kategori, dokumen, dan konten</p>
             </div>
             <i class="fas fa-arrow-right ml-auto text-purple-200"></i>
@@ -167,13 +167,13 @@
 
 <!-- Tambahkan di bagian manapun -->
 <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-    <h2 class="text-xl font-bold text-gray-800 mb-4">Administrasi Website</h2>
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Guest Website</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <a href="{{ route('admin.dashboard') }}" 
+        <a href="{{ route('admin.dashboard') }}"
            class="flex items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 border border-purple-200 transition duration-200">
             <i class="fas fa-cog text-purple-600 text-2xl mr-4"></i>
             <div>
-                <h4 class="font-semibold text-lg">Panel Administrator</h4>
+                <h4 class="font-semibold text-lg">Panel Guest</h4>
             <!-- Logout Section -->
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-xl font-bold text-gray-800 mb-4">Keluar</h2>

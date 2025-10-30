@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin - LegalHub')</title>
+    <title>@yield('title', 'Guest')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -13,31 +13,31 @@
         <!-- Sidebar -->
         <div class="bg-blue-800 text-white w-64 flex-shrink-0">
             <div class="p-4">
-                <h1 class="text-2xl font-bold">LegalHub Admin</h1>
-                <p class="text-blue-200 text-sm">Panel Administrasi</p>
+                <h1 class="text-2xl font-bold">Admin</h1>
+                <p class="text-blue-200 text-sm">Panel Administrator</p>
             </div>
-            
+
             <nav class="mt-6">
-                <a href="{{ route('admin.dashboard') }}" 
+                <a href="{{ route('admin.dashboard') }}"
                    class="block py-3 px-4 text-blue-100 hover:bg-blue-700 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-700' : '' }}">
                     <i class="fas fa-tachometer-alt mr-3"></i>Dashboard
                 </a>
-                
-                <a href="{{ route('admin.kategori.index') }}" 
+
+                <a href="{{ route('admin.kategori.index') }}"
                    class="block py-3 px-4 text-blue-100 hover:bg-blue-700 {{ request()->routeIs('admin.kategori.*') ? 'bg-blue-700' : '' }}">
                     <i class="fas fa-folder mr-3"></i>Kategori Dokumen
                 </a>
-                
-                <a href="{{ route('admin.dokumen.index') }}" 
+
+                <a href="{{ route('admin.dokumen.index') }}"
                    class="block py-3 px-4 text-blue-100 hover:bg-blue-700 {{ request()->routeIs('admin.dokumen.*') ? 'bg-blue-700' : '' }}">
                     <i class="fas fa-file-alt mr-3"></i>Dokumen Hukum
                 </a>
-                
-                <a href="{{ route('dashboard') }}" 
+
+                <a href="{{ route('dashboard') }}"
                    class="block py-3 px-4 text-blue-100 hover:bg-blue-700 mt-8 border-t border-blue-700 pt-4">
                     <i class="fas fa-arrow-left mr-3"></i>Kembali ke User Dashboard
                 </a>
-                
+
                 <form method="POST" action="{{ route('logout') }}" class="mt-4 px-4">
                     @csrf
                     <button type="submit" class="w-full text-left block py-3 px-4 text-blue-100 hover:bg-red-700 bg-red-600 rounded">
@@ -89,7 +89,7 @@
         // Konfirmasi delete
         document.addEventListener('DOMContentLoaded', function() {
             const deleteForms = document.querySelectorAll('form[data-confirm]');
-            
+
             deleteForms.forEach(form => {
                 form.addEventListener('submit', function(e) {
                     if (!confirm('Apakah Anda yakin ingin menghapus data ini?')) {
