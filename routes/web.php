@@ -1,25 +1,35 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\GuestController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JenisDokumenController;
+use App\Http\Controllers\KategoriDokumenController;
+use App\Http\Controllers\DokumenHukumController;
+use App\Http\Controllers\RiwayatPerubahanController;
+use App\Http\Controllers\LampiranDokumenController;
+use App\Http\Controllers\AuthController;
 
-Route::get('/', [GuestController::class, 'home'])->name('home');
-Route::get('/search', [GuestController::class, 'search'])->name('search');
-Route::get('/document/{id}', [GuestController::class, 'documentDetail'])->name('document.detail');
-Route::get('/category/{categoryId}', [GuestController::class, 'categoryDocuments'])->name('category.documents');
-Route::get('/type/{typeId}', [GuestController::class, 'typeDocuments'])->name('type.documents');
-Route::get('/about', [GuestController::class, 'about'])->name('about');
-Route::get('/contact', [GuestController::class, 'contact'])->name('contact');
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::resource('jenis-dokumen', JenisDokumenController::class);
+Route::resource('kategori-dokumen', KategoriDokumenController::class);
+Route::resource('dokumen-hukum', DokumenHukumController::class);
+Route::resource('riwayat-perubahan', RiwayatPerubahanController::class);
+Route::resource('lampiran-dokumen', LampiranDokumenController::class);
+
+
+// ================= AUTH =================
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::get('/register', [AuthController::class, 'registerForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/home', [AuthController::class, 'dashboard'])->name('home')->middleware('auth');
+// ================= DASHBOARD =================
+// Hanya bisa diakses oleh user yang sudah login
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::fallback(function () {
-    return view('errors.404');
+    // Kalau ingin home '/' sama dengan dashboard
+    Route::get('/', [DashboardController::class, 'index']);
 });
-
-Route::get('/dashboard', [DashboardController::class, 'index']);

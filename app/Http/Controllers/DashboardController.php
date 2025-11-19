@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\DokumenHukum;
+use App\Models\KategoriDokumen;
+use App\Models\JenisDokumen;
 
 class DashboardController extends Controller
 {
-    /**
-     * Constructor
-     * (tidak perlu middleware auth jika hanya untuk guest)
-     */
-    public function __construct()
-    {
-        // Kosong, karena tidak ada middleware untuk guest
-    }
-
-    /**
-     * Menampilkan dashboard guest
-     */
     public function index()
     {
-        // Menampilkan view layouts/guest/dashboard.blade.php
-        return view('layouts.dashboard');
+        $stats = [
+            'totalUsers'    => User::count(),
+            'totalDokumen'  => DokumenHukum::count(),
+            'totalKategori' => KategoriDokumen::count(),
+            'totalJenis'    => JenisDokumen::count(),
+        ];
+
+        return view('pages.dashboard', compact('stats'));
     }
 }

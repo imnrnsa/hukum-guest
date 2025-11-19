@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @include('layouts.guest.head')
+    @include('layouts.head')
 </head>
 <body class="index-page">
 
-    @include('layouts.guest.header')
+    @include('layouts.header')
 
     <main class="main">
         @yield('content')
     </main>
 
-    @include('layouts.guest.footer')
-    @include('layouts.guest.scripts')
+    @include('layouts.footer')
+    @include('layouts.scripts')
 
 </body>
 </html>

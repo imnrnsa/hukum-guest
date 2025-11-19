@@ -3,72 +3,88 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\DokumenHukum;
 use App\Models\JenisDokumen;
 use App\Models\KategoriDokumen;
-use App\Models\DokumenHukum;
-use Carbon\Carbon;
+use Faker\Factory as Faker;
 
 class DokumenHukumSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        // Jenis Dokumen
-        $jenis = [
-            ['nama_jenis' => 'Undang-Undang', 'deskripsi' => 'Produk hukum tingkat UU'],
-            ['nama_jenis' => 'Peraturan Pemerintah', 'deskripsi' => 'Peraturan tingkat pemerintah'],
-            ['nama_jenis' => 'Peraturan Presiden', 'deskripsi' => 'Peraturan tingkat presiden'],
-            ['nama_jenis' => 'Keputusan Menteri', 'deskripsi' => 'Keputusan tingkat menteri'],
-        ];
+        // Faker Bahasa Indonesia
+        $faker = Faker::create('id_ID');
 
-        foreach ($jenis as $j) {
-            JenisDokumen::create($j);
+        // Ambil jenis & kategori
+        $jenisList = JenisDokumen::pluck('jenis_id')->toArray();
+        $kategoriList = KategoriDokumen::pluck('kategori_id')->toArray();
+
+        // Jika belum ada data jenis
+        if (empty($jenisList)) {
+            $jenisList = [
+                JenisDokumen::create(['nama' => 'Peraturan Bupati', 'deskripsi' => ''])->jenis_id,
+                JenisDokumen::create(['nama' => 'Peraturan Daerah', 'deskripsi' => ''])->jenis_id,
+                JenisDokumen::create(['nama' => 'Keputusan Bupati', 'deskripsi' => ''])->jenis_id,
+                JenisDokumen::create(['nama' => 'Instruksi Bupati', 'deskripsi' => ''])->jenis_id,
+            ];
         }
 
-        // Kategori Dokumen
-        $kategori = [
-            ['nama' => 'Hukum Pidana', 'deskripsi' => 'Dokumen hukum pidana'],
-            ['nama' => 'Hukum Perdata', 'deskripsi' => 'Dokumen hukum perdata'],
-            ['nama' => 'Hukum Administrasi', 'deskripsi' => 'Dokumen hukum administrasi'],
-            ['nama' => 'Hukum Dagang', 'deskripsi' => 'Dokumen hukum dagang'],
-        ];
-
-        foreach ($kategori as $k) {
-            KategoriDokumen::create($k);
+        // Jika belum ada data kategori
+        if (empty($kategoriList)) {
+            $kategoriList = [
+                KategoriDokumen::create(['nama' => 'Pemerintahan', 'deskripsi' => ''])->kategori_id,
+                KategoriDokumen::create(['nama' => 'Kesehatan', 'deskripsi' => ''])->kategori_id,
+                KategoriDokumen::create(['nama' => 'Perekonomian', 'deskripsi' => ''])->kategori_id,
+                KategoriDokumen::create(['nama' => 'Pendidikan', 'deskripsi' => ''])->kategori_id,
+                KategoriDokumen::create(['nama' => 'Infrastruktur', 'deskripsi' => ''])->kategori_id,
+            ];
         }
 
-        // Dokumen Hukum Contoh
-        $dokumen = [
-            [
-                'jenis_id' => 1,
-                'kategori_id' => 1,
-                'nomor' => 'UU No. 1 Tahun 2024',
-                'judul' => 'Undang-Undang tentang Kitab Undang-Undang Hukum Pidana',
-                'tanggal' => '2024-01-15',
-                'ringkasan' => 'Undang-undang yang mengatur tentang hukum pidana di Indonesia termasuk tindak pidana, sanksi, dan proses peradilan pidana.',
-                'status' => 'active'
-            ],
-            [
-                'jenis_id' => 2,
-                'kategori_id' => 2,
-                'nomor' => 'PP No. 25 Tahun 2024',
-                'judul' => 'Peraturan Pemerintah tentang Hak dan Kewajiban dalam Hukum Perdata',
-                'tanggal' => '2024-03-20',
-                'ringkasan' => 'Peraturan pemerintah yang mengatur hubungan hukum antara orang perorangan dalam masyarakat termasuk hak dan kewajiban para pihak.',
-                'status' => 'active'
-            ],
-            [
-                'jenis_id' => 3,
-                'kategori_id' => 3,
-                'nomor' => 'Perpres No. 10 Tahun 2024',
-                'judul' => 'Peraturan Presiden tentang Reformasi Birokrasi',
-                'tanggal' => '2024-02-10',
-                'ringkasan' => 'Peraturan presiden yang bertujuan untuk meningkatkan efisiensi dan efektivitas pelayanan publik melalui reformasi birokrasi.',
-                'status' => 'active'
-            ],
+        // LIST judul khas Indonesia
+        $judulIndo = [
+            'Pelaksanaan Penyelenggaraan Pemerintahan Daerah',
+            'Pengelolaan Dana Desa Tahun Anggaran',
+            'Peningkatan Mutu Layanan Kesehatan Masyarakat',
+            'Pembangunan Infrastruktur Wilayah',
+            'Percepatan Digitalisasi Administrasi Pemerintahan',
+            'Pelaksanaan Program Keluarga Sejahtera',
+            'Penguatan Ekonomi Lokal Berbasis UMKM',
+            'Pengawasan Pengelolaan Barang Milik Daerah',
+            'Tata Cara Perizinan Usaha Mikro',
+            'Pedoman Standar Operasional Pelayanan Publik'
         ];
 
-        foreach ($dokumen as $d) {
-            DokumenHukum::create($d);
+        // Status Indonesia asli
+        $statusIndo = ['Berlaku', 'Dicabut', 'Revisi', 'Tidak Berlaku'];
+
+        // Generate 30 dokumen
+        for ($i = 0; $i < 30; $i++) {
+
+            // Nomor dokumen mirip format Indonesia
+            $nomor = $faker->numberBetween(1, 300) . "/" .
+                     strtoupper($faker->randomLetter()) . strtoupper($faker->randomLetter()) . "/" .
+                     $faker->numberBetween(2020, 2025);
+
+            DokumenHukum::create([
+                'jenis_id' => $faker->randomElement($jenisList),
+                'kategori_id' => $faker->randomElement($kategoriList),
+
+                'nomor'      => $nomor,
+
+                'judul'      => $faker->randomElement($judulIndo),
+
+                'tanggal'    => $faker->date(),
+
+                'ringkasan'  => $faker->randomElement([
+                    'Dokumen ini mengatur pelaksanaan kebijakan pemerintah daerah.',
+                    'Berisi ketentuan mengenai standar layanan publik bagi masyarakat.',
+                    'Memuat pengaturan terkait pengelolaan program pembangunan daerah.',
+                    'Mengatur tata cara pelaksanaan kebijakan strategis pemerintah.',
+                    'Berisi pedoman teknis pelaksanaan peraturan perundang-undangan.'
+                ]),
+
+                'status'     => $faker->randomElement($statusIndo),
+            ]);
         }
     }
 }
