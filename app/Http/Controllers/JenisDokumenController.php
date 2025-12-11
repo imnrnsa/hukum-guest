@@ -7,11 +7,31 @@ use Illuminate\Http\Request;
 
 class JenisDokumenController extends Controller
 {
-    public function index()
-    {
-        $data = JenisDokumen::all();
-        return view('pages.jenis.index', compact('data'));
-    }
+    public function index(Request $request)
+{
+    // menangkap kata kunci search
+    $search = $request->search;
+
+    // menangkap filter huruf awal (A, B, C, dst)
+    $filter = $request->filter;
+
+    $data = JenisDokumen::when($search, function ($query) use ($search) {
+            $query->where('nama_jenis', 'LIKE', '%'.$search.'%')
+                  ->orWhere('deskripsi', 'LIKE', '%'.$search.'%');
+        })
+        ->when($filter, function ($query) use ($filter) {
+            $query->where('nama_jenis', 'LIKE', $filter.'%');
+        })
+        ->orderBy('nama_jenis', 'ASC')
+        ->paginate(10)
+        ->appends([
+            'search' => $search,
+            'filter' => $filter
+        ]);
+
+    return view('pages.jenis.index', compact('data','search','filter'));
+}
+
 
     public function create()
     {

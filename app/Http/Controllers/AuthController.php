@@ -12,7 +12,7 @@ class AuthController extends Controller
     // TAMPILKAN FORM LOGIN
     public function loginForm()
     {
-        return view('layouts.auth.login'); // Sudah benar
+        return view('layouts.auth.login');
     }
 
     // PROSES LOGIN
@@ -25,9 +25,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
-
-            return redirect()->route('dashboard')
-                ->with('success', 'Berhasil login!');
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
@@ -41,7 +39,7 @@ class AuthController extends Controller
         return view('layouts.auth.register');
     }
 
-    // PROSES REGISTER
+    // PROSES REGISTER + AUTO LOGIN
     public function register(Request $request)
     {
         $request->validate([
@@ -50,15 +48,18 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
+        // SIMPAN USER
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role'     => 'user',
         ]);
 
-        return redirect()->route('login')
-            ->with('success', 'Registrasi berhasil, silakan login.');
+        // AUTO LOGIN
+        Auth::login($user);
+
+        return redirect()->route('dashboard')
+            ->with('success', 'Registrasi berhasil! Selamat datang.');
     }
 
     // LOGOUT

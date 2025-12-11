@@ -33,4 +33,31 @@ class RiwayatPerubahanController extends Controller
         RiwayatPerubahan::create($request->all());
         return redirect()->route('riwayat-perubahan.index');
     }
+    public function edit($id)
+{
+    return view('pages.riwayat.edit', [
+        'data' => RiwayatPerubahan::findOrFail($id),
+        'dokumen' => DokumenHukum::all()
+    ]);
+}
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'dokumen_id' => 'required',
+        'tanggal' => 'required',
+        'uraian_perubahan' => 'required',
+        'versi' => 'required'
+    ]);
+
+    RiwayatPerubahan::findOrFail($id)->update($request->all());
+    return redirect()->route('riwayat-perubahan.index');
+}
+
+public function destroy($id)
+{
+    RiwayatPerubahan::destroy($id);
+    return redirect()->route('riwayat-perubahan.index');
+}
+
 }

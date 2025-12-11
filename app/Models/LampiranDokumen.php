@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class LampiranDokumen extends Model
 {
+    protected $table = 'lampiran_dokumen';
     protected $primaryKey = 'lampiran_id';
-    protected $fillable = ['dokumen_id','file','keterangan'];
 
-    public function dokumen()
+    protected $fillable = ['judul', 'deskripsi'];
+
+    public function files()
     {
-        return $this->belongsTo(DokumenHukum::class, 'dokumen_id');
+        return $this->hasMany(LampiranFile::class, 'lampiran_id');
     }
 }
-
