@@ -87,4 +87,5 @@ class DokumenHukumSeeder extends Seeder
             ]);
         }
     }
+
 }
