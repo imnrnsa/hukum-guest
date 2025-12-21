@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-       Schema::create('dokumen_hukum', function (Blueprint $table) {
+      Schema::create('dokumen_hukum', function (Blueprint $table) {
     $table->id('dokumen_id');
 
     $table->unsignedBigInteger('jenis_id');
@@ -20,9 +20,11 @@ return new class extends Migration
     $table->text('ringkasan')->nullable();
     $table->string('status');
 
+    // Tambahkan kolom file
+    $table->string('file_path')->nullable();
+
     $table->timestamps();
 
-    // Foreign key benar
     $table->foreign('jenis_id')
           ->references('jenis_id')
           ->on('jenis_dokumen')
@@ -33,6 +35,7 @@ return new class extends Migration
           ->on('kategori_dokumen')
           ->onDelete('cascade');
 });
+
     }
 
     public function down()

@@ -4,11 +4,11 @@
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
         <i class="bi bi-envelope d-flex align-items-center">
-          <a href="mailto:HukumDesa@gmail.com">HukumDesa@gmail.com</a>
+          <a href="mailto:LegalHub@gmail.com">LegalHub@gmail.com</a>
         </i>
 
         <i class="bi bi-phone d-flex align-items-center ms-4">
-          <span>+62 5589 55488 55</span>
+          <span>+62-823-1116-2457</span>
         </i>
       </div>
 
@@ -23,9 +23,11 @@
 
   <div class="branding d-flex align-items-cente">
     <div class="container position-relative d-flex align-items-center justify-content-between">
-
-      <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-        <h1 class="sitename">BinaDesa</h1>
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="{{ asset('assets/img/logo/logo.png') }}" alt="Logo">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">LegalHub</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -114,4 +116,10 @@
 .wa-icon {
     color: white;
 }
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
 </style>

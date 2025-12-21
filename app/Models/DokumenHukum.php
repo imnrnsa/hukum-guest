@@ -17,6 +17,7 @@ class DokumenHukum extends Model
         'tanggal',
         'ringkasan',
         'status',
+        'file_path',
     ];
 
     public function jenis()

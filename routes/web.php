@@ -18,18 +18,22 @@ Route::resource('riwayat-perubahan', RiwayatPerubahanController::class);
 Route::resource('lampiran-dokumen', LampiranDokumenController::class);
 
 
-// ================= AUTH =================
-Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-Route::get('/register', [AuthController::class, 'registerForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// ========== AUTH ==========
+// Hanya untuk pengunjung (belum login)
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
-// ================= DASHBOARD =================
-// Hanya bisa diakses oleh user yang sudah login
+    Route::get('/register', [AuthController::class, 'registerForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+});
+
+// Logout hanya untuk yang login
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+// ========== DASHBOARD ==========
+// Hanya user login yang boleh masuk
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    // Kalau ingin home '/' sama dengan dashboard
     Route::get('/', [DashboardController::class, 'index']);
 });

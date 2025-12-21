@@ -1,82 +1,108 @@
 @extends('layouts.app')
 
-@section('title', 'Login')
+@section('title', 'Login - LegalHub')
 
 @section('content')
 <style>
     body {
-        background: #f3f4f6;
+        background: #f4f6f9;
         font-family: 'Inter', sans-serif;
     }
 
     .login-card {
         background: #ffffff;
-        padding: 2rem;
-        border-radius: 12px;
-        max-width: 380px;
+        padding: 2.2rem;
+        border-radius: 14px;
+        max-width: 410px;
         width: 100%;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-        margin: 50px auto;
+        margin: 60px auto;
+        position: relative;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+        border-top: 6px solid #1e3a8a; /* Navy hukum */
+    }
+
+    /* Ornamen hukum */
+    .law-icon {
+        font-size: 48px;
+        color: #1e3a8a;
+        margin-bottom: 10px;
     }
 
     .login-title {
-        font-size: 26px;
-        font-weight: 700;
-        color: #2563eb;
-        margin-bottom: 4px;
+        font-size: 28px;
+        font-weight: 800;
+        color: #1e3a8a;
     }
 
     .subtitle {
         color: #6b7280;
         font-size: 14px;
+        margin-top: -5px;
     }
 
-    input[type="email"],
-    input[type="password"] {
+    /* Input */
+    .input-box {
         width: 100%;
         padding: 10px 12px;
-        border: 1px solid #d1d5db;
-        border-radius: 8px;
-        outline: none;
-        transition: 0.2s;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        transition: 0.25s;
+        background: #f8fafc;
     }
 
-    input:focus {
-        border-color: #2563eb;
-        box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+    .input-box:focus {
+        border-color: #1e3a8a;
+        box-shadow: 0 0 0 2px rgba(30,58,138,0.15);
+        background: #ffffff;
     }
 
+    /* Button */
     .btn-submit {
-        margin-top: 10px;
+        margin-top: 15px;
         width: 100%;
-        background: #2563eb;
+        background: linear-gradient(90deg, #1e3a8a, #3b82f6);
         padding: 11px;
         color: white;
         border: none;
-        border-radius: 8px;
+        border-radius: 10px;
         font-weight: 600;
         cursor: pointer;
-        transition: 0.2s;
+        transition: 0.25s;
+        letter-spacing: 0.3px;
     }
 
     .btn-submit:hover {
-        background: #1e4fcf;
+        background: linear-gradient(90deg, #162c6a, #2563eb);
     }
 
+    /* Footer links */
     .footer-link a {
-        color: #2563eb;
+        color: #1e3a8a;
         text-decoration: none;
+        font-weight: 500;
     }
 
     .footer-link a:hover {
         text-decoration: underline;
     }
+
+    /* Dekorasi garis hukum */
+    .law-divider {
+        width: 70px;
+        height: 3px;
+        background: #1e3a8a;
+        margin: 10px auto 20px auto;
+        border-radius: 10px;
+    }
 </style>
 
 <div class="login-card">
+
     <div class="text-center mb-4">
-        <h1 class="login-title">LegalHub</h1>
-        <p class="subtitle">Masuk ke akun Anda</p>
+        <div class="law-icon">⚖️</div>
+        <h1 class="login-title">Hukum Publik</h1>
+        <div class="law-divider"></div>
+        <p class="subtitle">Pusat Layanan Dokumen Hukum Desa</p>
     </div>
 
     {{-- Alert Error --}}
@@ -102,11 +128,13 @@
         @csrf
 
         <label class="text-gray-700 text-sm font-medium mb-1">Email</label>
-        <input type="email" name="email" value="{{ old('email') }}" required placeholder="Masukkan email Anda">
+        <input type="email" name="email" class="input-box"
+               value="{{ old('email') }}" required placeholder="Masukkan email Anda">
 
         <div class="mt-3">
             <label class="text-gray-700 text-sm font-medium mb-1">Password</label>
-            <input type="password" name="password" required placeholder="Masukkan password Anda">
+            <input type="password" name="password" class="input-box"
+                   required placeholder="Masukkan password Anda">
         </div>
 
         <div class="mt-3 flex items-center justify-between text-sm">
@@ -114,7 +142,7 @@
                 <input type="checkbox" name="remember">
                 Ingat saya
             </label>
-            <a href="#" class="text-blue-600 hover:underline">Lupa password?</a>
+            <a href="#" class="text-blue-900 hover:underline">Lupa password?</a>
         </div>
 
         <button type="submit" class="btn-submit">Masuk</button>
@@ -128,6 +156,7 @@
     <div class="mt-5 text-center text-sm text-gray-500 footer-link">
         <a href="{{ url('/') }}">← Kembali ke Beranda</a>
     </div>
+
 </div>
 
 @endsection

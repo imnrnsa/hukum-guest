@@ -5,6 +5,7 @@
 <!-- Favicons -->
 <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
 <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+<link href="{{ asset('favicon.ico') }}" rel="icon" >
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -20,3 +21,5 @@
 
 <!-- Main CSS File -->
 <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+
+
