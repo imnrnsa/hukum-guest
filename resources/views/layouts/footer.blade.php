@@ -14,7 +14,9 @@
           <p><strong>Email:</strong> <span>hukum@desamandiri.id</span></p>
         </div>
       </div>
-
+      <a href="{{ route('identitas') }}" class="text-decoration-none">
+            Tentang / Identitas Saya
+        </a>
       <!-- Link Produk Hukum -->
       <div class="col-lg-2 col-md-3 footer-links">
         <h4>Produk Hukum</h4>

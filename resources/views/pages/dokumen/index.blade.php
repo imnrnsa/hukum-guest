@@ -58,13 +58,17 @@
             </div>
 
             <div class="col-md-12 mt-2">
-                <a href="{{ route('dokumen-hukum.index') }}" class="btn btn-secondary btn-sm">Reset</a>
+                <a href="{{ route('dokumen-hukum.index') }}" class="btn btn-secondary btn-sm">
+                    Reset
+                </a>
             </div>
         </div>
     </form>
 
     {{-- Tombol Tambah --}}
-    <a href="{{ route('dokumen-hukum.create') }}" class="btn btn-primary mb-3">Tambah Dokumen</a>
+    <a href="{{ route('dokumen-hukum.create') }}" class="btn btn-primary mb-3">
+        Tambah Dokumen
+    </a>
 
     {{-- Success Message --}}
     @if (session('success'))
@@ -72,9 +76,9 @@
     @endif
 
     {{-- TABLE --}}
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped align-middle">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th>Nomor</th>
                 <th>Judul</th>
                 <th>Jenis</th>
@@ -87,46 +91,53 @@
         </thead>
 
         <tbody>
-            @foreach($data as $d)
-            <tr>
-                <td>{{ $d->nomor }}</td>
-                <td>{{ $d->judul }}</td>
-                <td>{{ $d->jenis->nama_jenis }}</td>
-                <td>{{ $d->kategori->nama_kategori }}</td>
-                <td>{{ $d->tanggal }}</td>
-                <td>{{ $d->status }}</td>
+            @forelse($data as $d)
+                <tr>
+                    <td>{{ $d->nomor }}</td>
+                    <td>{{ $d->judul }}</td>
+                    <td>{{ $d->jenis->nama_jenis }}</td>
+                    <td>{{ $d->kategori->nama_kategori }}</td>
+                    <td>{{ $d->tanggal }}</td>
+                    <td>{{ $d->status }}</td>
 
-                {{-- File --}}
-                <td>
-                    @if($d->file_path)
-                        <a href="{{ asset($d->file_path) }}" target="_blank" class="btn btn-success btn-sm">
-                            Lihat
-                        </a>
-                    @else
-                        <span class="text-muted">Tidak ada file</span>
-                    @endif
-                </td>
+                    {{-- File --}}
+                    <td class="text-center">
+                        @if($d->file_path)
+                            <a href="{{ asset($d->file_path) }}" target="_blank"
+                               class="btn btn-success btn-sm">
+                                Lihat
+                            </a>
+                        @else
+                            <span class="text-muted">Tidak ada file</span>
+                        @endif
+                    </td>
 
-                {{-- Aksi --}}
-                <td class="d-flex gap-2">
+                    {{-- Aksi --}}
+                    <td class="d-flex gap-2 justify-content-center">
+                        <a href="{{ route('dokumen-hukum.edit', $d->dokumen_id) }}"
+                           class="btn btn-warning btn-sm">Edit</a>
 
-                    <a href="{{ route('dokumen-hukum.edit', $d->dokumen_id) }}"
-                       class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('dokumen-hukum.show', $d->dokumen_id) }}"
+                           class="btn btn-info btn-sm">Detail</a>
 
-                    <a href="{{ route('dokumen-hukum.show', $d->dokumen_id) }}"
-                       class="btn btn-info btn-sm">Detail</a>
-
-                    <form action="{{ route('dokumen-hukum.destroy', $d->dokumen_id) }}"
-                          method="POST"
-                          onsubmit="return confirm('Yakin ingin menghapus?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger btn-sm">Hapus</button>
-                    </form>
-
-                </td>
-            </tr>
-            @endforeach
+                        <form action="{{ route('dokumen-hukum.destroy', $d->dokumen_id) }}"
+                              method="POST"
+                              onsubmit="return confirm('Yakin ingin menghapus?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                {{-- PLACEHOLDER JIKA DATA KOSONG --}}
+                <tr>
+                    <td colspan="8" class="text-center py-4 text-muted">
+                        <strong>Data dokumen tidak ditemukan</strong><br>
+                        Silakan ubah kata kunci pencarian atau filter.
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 

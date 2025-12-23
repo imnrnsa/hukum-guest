@@ -10,6 +10,7 @@ use App\Http\Controllers\LampiranDokumenController;
 use App\Http\Controllers\AuthController;
 
 
+
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('jenis-dokumen', JenisDokumenController::class);
 Route::resource('kategori-dokumen', KategoriDokumenController::class);
@@ -17,6 +18,9 @@ Route::resource('dokumen-hukum', DokumenHukumController::class);
 Route::resource('riwayat-perubahan', RiwayatPerubahanController::class);
 Route::resource('lampiran-dokumen', LampiranDokumenController::class);
 
+Route::get('/identitas', function () {
+    return view('pages.identitas');
+})->name('identitas');
 
 // ========== AUTH ==========
 // Hanya untuk pengunjung (belum login)

@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->id('file_id');
             $table->unsignedBigInteger('lampiran_id');
             $table->string('file_path'); 
-            $table->string('file_type'); // file / image
+            $table->string('file_type'); 
             $table->timestamps();
 
             $table->foreign('lampiran_id')

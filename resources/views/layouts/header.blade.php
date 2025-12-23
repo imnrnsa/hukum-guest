@@ -4,7 +4,7 @@
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
         <i class="bi bi-envelope d-flex align-items-center">
-          <a href="mailto:LegalHub@gmail.com">LegalHub@gmail.com</a>
+          <a href="mailto:hukumPublik@gmail.com">hukumPublik@gmail.com</a>
         </i>
 
         <i class="bi bi-phone d-flex align-items-center ms-4">
@@ -27,7 +27,7 @@
         <img src="{{ asset('assets/img/logo/logo.png') }}" alt="Logo">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">LegalHub</h1>
+        <h1 class="sitename">HukumPublik</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
