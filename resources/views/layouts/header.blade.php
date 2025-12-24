@@ -35,6 +35,12 @@
               <li>
                   <a href="{{ route('dashboard') }}" class="active">Dashboard</a>
               </li>
+            <li>
+    <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">
+        Tentang
+    </a>
+</li>
+
 
               <!-- PRODUK HUKUM -->
               <li class="dropdown">

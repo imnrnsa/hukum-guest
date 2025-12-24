@@ -8,8 +8,9 @@ use App\Http\Controllers\DokumenHukumController;
 use App\Http\Controllers\RiwayatPerubahanController;
 use App\Http\Controllers\LampiranDokumenController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AboutController;
 
-
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('jenis-dokumen', JenisDokumenController::class);
@@ -18,9 +19,8 @@ Route::resource('dokumen-hukum', DokumenHukumController::class);
 Route::resource('riwayat-perubahan', RiwayatPerubahanController::class);
 Route::resource('lampiran-dokumen', LampiranDokumenController::class);
 
-Route::get('/identitas', function () {
-    return view('pages.identitas');
-})->name('identitas');
+Route::view('/identitas', 'pages.identitas')->name('identitas');
+    
 
 // ========== AUTH ==========
 // Hanya untuk pengunjung (belum login)
